@@ -4,6 +4,7 @@ RUN mkdir stock
 COPY . /stock
 WORKDIR /stock
 RUN pip install -r requirements.txt
+RUN pip install --upgrade streamlit
 RUN ls -la
 WORKDIR /stock/src
 RUN ls -la

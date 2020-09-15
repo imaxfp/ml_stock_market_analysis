@@ -1,11 +1,9 @@
 from sklearn.metrics.pairwise import cosine_similarity
-
 from src.util.util_log import log
 
 
 def measure(df_encoded, df_raw, row_id, result_file_path):
     '''
-
     Parameters
     ----------
     df_encoded: will be created matrix for the cosine similarities calculation

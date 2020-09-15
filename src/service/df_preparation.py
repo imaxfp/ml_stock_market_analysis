@@ -1,6 +1,4 @@
 import pandas as pd
-from src.util.util_log import log
-
 
 def get_init_df(path):
     """
@@ -11,10 +9,32 @@ def get_init_df(path):
     """
     df_raw = pd.read_csv(path)
     df_raw = drop_null(df_raw)
+    df_raw = rename(df_raw)
     df_encoded = one_hot_encoding(df_raw)
+
+    df_main_features(df_raw)
+
     print(df_raw)
     print(df_encoded)
     return df_raw, df_encoded
+
+
+def df_main_features(df):
+    """
+    Parameters
+    ----------
+    df: Initial df
+
+    Returns: df with main features
+    -------
+    """
+    df = df[['Ticker', 'Revenue']]
+    return df
+
+
+def rename(df):
+    df = df.rename({'Unnamed: 0': 'Ticker'}, axis=1)
+    return df
 
 
 def one_hot_encoding(df):
