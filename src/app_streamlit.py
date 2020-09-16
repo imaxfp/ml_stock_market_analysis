@@ -10,17 +10,30 @@ import streamlit as st
 import pandas as pd
 from src.service import df_preparation, similarity
 
-# from service import similarity
+df_raw, df_encoded = df_preparation.get_init_df(path="./data/financial_data.csv", nrows=100)
 
-df = pd.read_csv("./data/financial_data.csv")
-df_raw, df_encoded = df_preparation.get_init_df("./data/financial_data.csv")
+# from service import similarity
+ticker = st.selectbox('Select Ticker', (df_raw['Ticker'].tolist()))
+st.write(
+    """
+    <style type="text/css" media="screen">
+    div[role="listbox"] ul {
+        height:300px;
+    }
+    </style>
+    """
+    ,
+    unsafe_allow_html=True,
+)
 
 st.title("Raw data:")
 st.dataframe(df_raw)
 
 # Measure cosine similarities
-similarity.measure(df_encoded=df_encoded, df_raw=df_raw, row_id=1, result_file_path='./output/cosine_similarity.csv')
+st.write('You selected:', ticker)
+target_row = df_raw[df_raw['Ticker']==ticker]
+similarity.measure(df_encoded=df_encoded, df_raw=df_raw, row_id=target_row.index[0], result_file_path='./output/cosine_similarity.csv')
 
 st.title("Prepared data:")
-df_view = df_raw[['Ticker', 'Revenue', 'Sector', 'Asset Growth', 'Operating Cash Flow growth', 'cosine_similarities']]
+df_view = df_raw[['Ticker', 'cosine_similarities', 'Revenue', 'Sector', 'Asset Growth', 'Operating Cash Flow growth']]
 st.dataframe(df_view)

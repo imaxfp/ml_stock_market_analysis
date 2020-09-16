@@ -1,13 +1,14 @@
 import pandas as pd
 
-def get_init_df(path):
+
+def get_init_df(path, nrows):
     """
     Parameters
     ----------
     path: to the data frame csv.
     -------
     """
-    df_raw = pd.read_csv(path)
+    df_raw = pd.read_csv(filepath_or_buffer=path, nrows=nrows)
     df_raw = drop_null(df_raw)
     df_raw = rename(df_raw)
     df_encoded = one_hot_encoding(df_raw)
