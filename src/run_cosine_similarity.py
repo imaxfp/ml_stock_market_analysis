@@ -10,12 +10,11 @@ print("os.environ = ", os.environ)
 
 
 
-
 def measure(df_raw, df_encoded):
-    return similarity.measure(df_encoded=df_encoded,
-                              df_raw=df_raw,
-                              row_id=1,
-                              result_file_path='./output/cosine_similarity.csv')
+    return similarity.cosine(df_encoded=df_encoded,
+                             df_raw=df_raw,
+                             row_id=1,
+                             result_file_path='./output/cosine_similarity.csv')
 
 
 if __name__ == '__main__':

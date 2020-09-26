@@ -1,6 +1,12 @@
-streamlit==0.66.0
+streamlit==0.67.1
+alt==0.0.4
 scikit-learn==0.23.2
 sklearn==0.0
-numpy==1.19.1
+numpy==1.19.2
 werkzeug==1.0.1
-pandas==1.1.1
+pandas==1.1.2
+pytest==6.0.2
+matplotlib==3.3.2
+xgboost==1.2.0
+shap==0.36.0
+seaborn==0.11.0

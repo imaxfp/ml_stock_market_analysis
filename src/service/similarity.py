@@ -2,7 +2,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from src.util.util_log import log
 
 
-def measure(df_encoded, df_raw, row_id, result_file_path):
+def cosine(df_encoded, df_raw, row_id, result_file_path):
     '''
     Parameters
     ----------

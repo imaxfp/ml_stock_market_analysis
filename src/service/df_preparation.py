@@ -20,6 +20,12 @@ def get_init_df(path, nrows):
     return df_raw, df_encoded
 
 
+def get_df_features(path, nrows, list_features):
+    df_raw, df_encoded = get_init_df(path, nrows)
+    df_selected_columns = df_raw[list_features]
+    return df_selected_columns, one_hot_encoding(df_selected_columns)
+
+
 def df_main_features(df):
     """
     Parameters
