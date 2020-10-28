@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  app:
+    build: ./
+    command: streamlit run app/src/app_streamlit.py --server.port 5000
+    #volumes:
+    #  - ./:/usr/src/app
+    ports:
+      - 5000:5000
+    image: ml_similarity_app:latest

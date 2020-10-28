@@ -1,8 +1,8 @@
 import os
 import sys
-
-os.environ['PYTHONPATH'] = '/usr/local/bin/python3.8'
-sys.path.append("/github/ml-stock-market-analysis/")
+# TODO DO NOT USE IT! USE GLOBAL ENV VARS
+# os.environ['PYTHONPATH'] = '/usr/local/bin/python3.8'
+#sys.path.append("/app")
 
 import altair as alt
 from service import df_preparation, similarity
@@ -83,6 +83,9 @@ def build_bar_chart(df_raw, independent_features, dependent_feature, fun, title)
                          'y': list(independent_features)})
     plot_bar_chart(title, data)
 
+
+# Visualisation which plots the correlation measure for every feature in the data set.
+corr = df_raw.corr()
 
 build_bar_chart(df_raw,
                 independent_features,

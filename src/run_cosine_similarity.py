@@ -3,12 +3,6 @@ import sys
 from src.service import similarity
 from src.service.df_preparation import get_init_df
 
-import os
-os.environ['PATH'] = '/Users/maxim/Documents/github/ml-stock-market-analysis/src'
-# current environment variables
-print("os.environ = ", os.environ)
-
-
 
 def measure(df_raw, df_encoded):
     return similarity.cosine(df_encoded=df_encoded,

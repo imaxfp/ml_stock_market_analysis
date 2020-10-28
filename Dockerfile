@@ -1,16 +1,23 @@
-FROM python:3.7
-MAINTAINER "imaxfp@gmail.com"
-RUN mkdir stock
-COPY . /stock
-WORKDIR /stock
-RUN pip install -r requirements.txt
-RUN pip install --upgrade streamlit
-RUN ls -la
-WORKDIR /stock/src
-RUN ls -la
-ENTRYPOINT ["python"]
-EXPOSE 5000
-CMD ["app.py"]
+##################### dependent base image with requerements #####################
+FROM python:3.8 AS ml_similarity_base
+COPY ./requirements.txt /opt/app/requirements.txt
+WORKDIR /opt/app
+#RUN pip install pip3
+RUN pip3 install streamlit \
+    && pip3 install -r requirements.txt
 
-#CMD gunicorn --worker-class gevent --workers 1 --bind 0.0.0.0:5001 wsgi:app --max-requests 10000 --timeout 5 --keep-alive 5 --log-level info
-#CMD gunicorn --worker-class gevent --workers 8 --bind 0.0.0.0:5000 wsgi:app --max-requests 10000 --timeout 5 --keep-alive 5 --log-level info
+##################### dependent ml app #####################
+FROM ml_similarity_base AS ml_similarity_app
+ENV PYTHONPATH "${PYTHONPATH}" \
+    + ":/usr/local/bin/python3.8" \
+    + ":/app"
+
+RUN mkdir app
+COPY . /app
+WORKDIR /app/src
+
+EXPOSE 8501
+RUN ls -la
+#CMD ["streamlit run --server.port 5000 app_streamlit.py"]
+CMD ["streamlit", "run", "app_streamlit.py"]
+
