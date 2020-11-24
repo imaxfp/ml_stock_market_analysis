@@ -1,4 +1,13 @@
 steps:
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: [ 'app', 'deploy' ]
-    timeout: '1600s'
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+  - 'run'
+  - 'deploy'
+  - 'cloudrunservice'
+  - '--image'
+  - 'us-docker.pkg.dev/cloudrun/container/ml-stock-market-analysis'
+  - '--region'
+  - 'us-central1'
+  - '--platform'
+  - 'managed'
+  - '--allow-unauthenticated'
